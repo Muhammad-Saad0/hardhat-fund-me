@@ -60,5 +60,53 @@ describe("fundMe", async () => {
       console.log("fetched funders.");
       expect(funder).to.equal(deployer);
     });
+
+    describe("withdraw", async () => {
+      beforeEach(async () => {
+        await fundMe.fund({ value: sendValue });
+      });
+
+      it("withdraws the ETH", async () => {
+        //Arrange
+        const startingDeployerAccBalance =
+          await ethers.provider.getBalance(
+            deployer
+          );
+        const startingContractAccBalance =
+          await ethers.provider.getBalance(
+            fundMe.address
+          );
+        //Act
+        const transaction =
+          await fundMe.withdraw();
+        const { gasUsed, effectiveGasPrice } =
+          await transaction.wait(1);
+
+        const gasCost = gasUsed.mul(
+          effectiveGasPrice
+        );
+
+        const endingDeployerAccBalance =
+          await ethers.provider.getBalance(
+            deployer
+          );
+        const endingContractAccBalance =
+          await ethers.provider.getBalance(
+            fundMe.address
+          );
+        //Expect
+        expect(endingContractAccBalance).to.equal(
+          0
+        );
+
+        expect(
+          endingDeployerAccBalance.add(gasCost)
+        ).to.equal(
+          startingContractAccBalance.add(
+            startingDeployerAccBalance
+          )
+        );
+      });
+    });
   });
 });
