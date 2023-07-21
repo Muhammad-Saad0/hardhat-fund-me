@@ -14,7 +14,7 @@ library PriceConverter {
         // https://docs.chain.link/data-feeds/price-feeds/addresses#Sepolia%20Testnet
         (, int256 answer, , , ) = priceFeed.latestRoundData();
         // ETH/USD rate in 18 digit
-        return uint256(answer * 10000000000);
+        return uint256(answer * 1e10);
         // or (Both will do the same thing)
         // return uint256(answer * 1e10); // 1* 10 ** 10 == 10000000000
     }
