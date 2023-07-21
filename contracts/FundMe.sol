@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity 0.8.19;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
@@ -8,7 +8,7 @@ error NotOwner();
 
 contract FundMe {
     using PriceConverter for uint256;
-       AggregatorV3Interface priceFeed;
+    AggregatorV3Interface public priceFeed;
 
     mapping(address => uint256) public addressToAmountFunded;
     address[] public funders;
@@ -62,12 +62,5 @@ contract FundMe {
     //  /        \
     //receive()  fallback()
 
-    fallback() external payable {
-        fund();
-    }
-
-    receive() external payable {
-        fund();
-    }
 }
 

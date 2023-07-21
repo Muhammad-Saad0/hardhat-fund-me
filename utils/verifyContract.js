@@ -1,7 +1,6 @@
 const { run } = require("hardhat");
 
 async function verify(contractAddress, args) {
-  console.log("verifying contract...");
   //this "run" allows us to run any hardhat task
   //(that can be run in terminal)
 
