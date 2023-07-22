@@ -26,6 +26,7 @@ module.exports = {
       accounts: [ACCOUNT_PRIVATE_KEY],
       chainId: 11155111,
       blockConfirmations: 3,
+      setTimeout: 120000,
     },
     localhost: {
       url: "http://127.0.0.1:8545/",
@@ -36,11 +37,11 @@ module.exports = {
     apiKey: ETHERSCAN_API_KEY,
   },
   gasReporter: {
-    enabled: false,
+    enabled: true,
     outputFile: "gas-report.txt",
     noColors: true,
     currency: "USD",
-    coinmarketcap: COINMARKETCAP_API_KEY,
+    // coinmarketcap: COINMARKETCAP_API_KEY,
   },
   namedAccounts: {
     deployer: {
